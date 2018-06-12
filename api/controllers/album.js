@@ -9,9 +9,10 @@ var Song = require('../models/song');
 
 function getAlbum(req, res){
 	var albumId = req.params.id;
-
+	console.log(albumId);
 	Album.findById(albumId).populate({path: 'artist'}).exec((err, album) =>{
 		if(err){
+			console.log(err);
 			res.status(500).send({message: 'Error en la petición.'});
 		}else{
 			if(!album){

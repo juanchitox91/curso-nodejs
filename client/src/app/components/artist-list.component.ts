@@ -104,12 +104,13 @@ export class ArtistListComponent implements OnInit{
 				error => {
 				var errorMessage = <any>error;
 
-	  			if(errorMessage != null){
-	  				var body = JSON.parse(error._body);
-	  				//this.alertMessage = body.message;
+		  			if(errorMessage != null){
+		  				var body = JSON.parse(error._body);
+		  				//this.alertMessage = body.message;
 
-	  				console.log(error);
-	  			}
+		  				console.log(error);
+		  			}
+		  		}
 		)
 	}
 }

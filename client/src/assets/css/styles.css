@@ -86,7 +86,8 @@ html, body{
 	cursor: :pointer;
 }
 
-.artist_image_for_edit img {
+.artist_image_for_edit img,
+.album_image_for_edit img  {
 	width:150px;
 }
 
@@ -137,7 +138,8 @@ html, body{
 }
 
 #artist-head-card .image img{
-	height: 150px;
+	width: 150px;
 }
+
 
 
