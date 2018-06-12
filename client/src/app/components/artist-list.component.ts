@@ -75,9 +75,41 @@ export class ArtistListComponent implements OnInit{
 	  				console.log(error);
 	  			}
 			}
-			);
-		}
+		);
+	});
+	
+	}
 
+	public confirmado;
+
+	onDeleteConfirm(id){
+		this.confirmado = id;
+	}
+
+	onCancelArtist(){
+		this.confirmado = null;
+	}
+
+	onDeleteArtist(id){
+	console.log('llamando al metodo con ' + id);
+		this._artistService.deleteArtist(this.token, id).subscribe(
+			response =>{
+				debugger;
+					if(!response.artist){
+						alert('Error en el servidor')
+					}else{
+						this.getArtists();
+					}
+				},
+				error => {
+				var errorMessage = <any>error;
+
+	  			if(errorMessage != null){
+	  				var body = JSON.parse(error._body);
+	  				//this.alertMessage = body.message;
+
+	  				console.log(error);
+	  			}
 		)
 	}
 }
