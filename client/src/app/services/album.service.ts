@@ -13,6 +13,24 @@ export class AlbumService{
 		this.url = GLOBAL.url;
 	}	
 
+	getAlbums(token, artistId = null){
+		let headers = new Headers({
+			'Content-Type':'application/json',
+			'Authorization': token
+		});
+
+		let options = new RequestOptions({headers:headers});
+
+		if(artistId == null){
+			return this._http.get(this.url+'albums', options)
+				.map(res => res.json());
+		}else{
+			return this._http.get(this.url+'albums/'+artistId, options)
+				.map(res => res.json());
+		}
+
+	}
+
 	getAlbum(token, id: string){
 		let headers = new Headers({
 			'Content-Type':'application/json',
