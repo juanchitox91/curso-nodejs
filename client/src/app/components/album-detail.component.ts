@@ -3,21 +3,18 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { GLOBAL } from '../services/global';
 import { UserService} from '../services/user.service';
-import { ArtistService} from '../services/artist.service';
-import { Artist } from '../models/artist';
 import { AlbumService} from '../services/album.service';
 import { Album} from '../models/album';
 
 
 @Component({
-	selector: 'artist-detail',
-	templateUrl: '../views/artist-detail.html',
-	providers: [UserService, ArtistService, AlbumService]
+	selector: 'album-detail',
+	templateUrl: '../views/album-detail.html',
+	providers: [UserService, AlbumService]
 })
 
-export class ArtistDetailComponent implements OnInit{
-	public artist: Artist;
-	public albums: Album[];
+export class AlbumDetailComponent implements OnInit{
+	public album: Album;
 	public identity;
 	public token;
 	public url: string;
@@ -27,7 +24,6 @@ export class ArtistDetailComponent implements OnInit{
 		private _route: ActivatedRoute,
 		private _router: Router,
 		private _userService: UserService,
-		private _artistService: ArtistService,
 		private _albumService: AlbumService,
 
 	){
@@ -37,23 +33,29 @@ export class ArtistDetailComponent implements OnInit{
 	}
 
 	ngOnInit(){
-		console.log('artist-edit.component.ts cargado');
-		//Llamar al metodo del api para sacar un artista en base a su id getArtist
-		this.getArtist();
+		console.log('album-detail.component.ts cargado');
+		//Sacar album de la bbdd
+		this.getAlbum();
 	}
 
 
-	getArtist(){
+	getAlbum(){
+		console.log('el metodo funciona');
+		
 		this._route.params.forEach((params: Params) => {
 			let id = params['id'];
 
-			this._artistService.getArtist(this.token, id).subscribe(
+			this._albumService.getAlbum(this.token, id).subscribe(
 				response => {
 
-					if(!response.artist){
+					if(!response.album){
+						console.log('no pasa nada');
 						this._router.navigate(['/']);
 					}else{
-						this.artist = response.artist;
+						console.log('pasa todo kape');
+						this.album = response.album;
+
+						/*
 						//sacar los albums del artista
 						this._albumService.getAlbums(this.token, response.artist._id).subscribe(
 						response =>{
@@ -72,7 +74,7 @@ export class ArtistDetailComponent implements OnInit{
 
 				  				console.log(error);
 				  			}
-						});
+						});*/
 					}
 				}, error=>{
 					var errorMessage = <any>error;
@@ -88,35 +90,5 @@ export class ArtistDetailComponent implements OnInit{
 		});
 	}
 
-	public confirmado;
-	onDeleteConfirm(id){
-		this.confirmado = id;
-
-	}
-
-	onCancelAlbum(){
-		this.confirmado = null;
-
-	}
 	
-	onDeleteAlbum(id){
-		this._albumService.deleteAlbum(this.token, id).subscribe(
-				response=>{
-					if(!response.album){
-						alert('Error en el servidor');
-					}
-
-					this.getArtist();
-				}, 
-				error=>{
-					var errorMessage = <any>error;
-
-		  			if(errorMessage != null){
-		  				var body = JSON.parse(error._body);
-		  				//this.alertMessage = body.message;
-		  				console.log(error);
-		  			}
-				}
-			);
-	}
 }

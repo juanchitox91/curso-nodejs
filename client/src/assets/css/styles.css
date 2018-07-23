@@ -21,7 +21,11 @@ html, body{
 	background: #222326;
 	position: absolute;
 	height: 40px;
+}
 
+.seguro-album{
+	margin-top: -41px;
+	margin-left: 10px;
 }
 
 /*BARRA LATERAL*/
@@ -89,9 +93,10 @@ html, body{
 	cursor: :pointer;
 }
 
-/*DETALLE DE ARTISTAS*/
+/*DETALLE DE ARTISTAS Y ALBUM*/
 
-#artist-head-card .image{
+#artist-head-card .image,
+#album-head-card .image{
 	width: 150px;
 	height: 150px;
 	overflow: hidden;
@@ -99,7 +104,8 @@ html, body{
 	margin-right: 30px;
 }
 
-#artist-head-card .image img{
+#artist-head-card .image img,
+#album-head-card .image img{
 	width: 150px;
 }
 
