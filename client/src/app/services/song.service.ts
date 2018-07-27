@@ -13,7 +13,7 @@ export class SongService{
 		this.url = GLOBAL.url;
 	}	
 
-	/*getAlbums(token, artistId = null){
+	getSongs(token, albumId = null){
 		let headers = new Headers({
 			'Content-Type':'application/json',
 			'Authorization': token
@@ -21,15 +21,15 @@ export class SongService{
 
 		let options = new RequestOptions({headers:headers});
 
-		if(artistId == null){
-			return this._http.get(this.url+'albums', options)
+		if(albumId == null){
+			return this._http.get(this.url+'songs', options)
 				.map(res => res.json());
 		}else{
-			return this._http.get(this.url+'albums/'+artistId, options)
+			return this._http.get(this.url+'songs/'+albumId, options)
 				.map(res => res.json());
 		}
 
-	}*/
+	}
 
 	getSong(token, id: string){
 		let headers = new Headers({
@@ -64,16 +64,16 @@ export class SongService{
 			.map(res => res.json());
 	}
 	
-	/*deleteAlbum(token, id: string){
+	deleteSong(token, id: string){
 		let headers = new Headers({
 			'Content-Type':'application/json',
 			'Authorization': token
 		});
 
 		let options = new RequestOptions({headers:headers});
-		return this._http.delete(this.url+'album/'+id, options)
+		return this._http.delete(this.url+'song/'+id, options)
 			.map(res => res.json());
-	}*/
+	}
 
 
 }
