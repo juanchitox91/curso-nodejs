@@ -79,6 +79,7 @@ function getSongs(req, res){
 }
 
 function updateSong(req, res){
+	debugger;
 	var songId = req.params.id;
 	var update = req.body;
 
@@ -117,7 +118,7 @@ function deleteSong(req, res){
 function uploadFile(req, res){
 	var songId = req.params.id;
 	var file_name = 'No subido...';
-
+	debugger;
 	if(req.files){
 		var file_path = req.files.file.path;
 		var file_split = file_path.split('\\');
